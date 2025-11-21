@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>O Curso - Engenharia de Software</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0d59f2",
+              "background-light": "#f5f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: { "display": ["Space Grotesk", "sans-serif"] },
+          },
+        },
+      }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    
+    <header class="flex items-center justify-between border-b border-white/10 px-4 sm:px-10 py-4 sticky top-0 z-50 bg-background-dark/95 backdrop-blur-sm">
+        <a href="{% url 'home' %}" class="flex items-center gap-2 text-white hover:text-primary transition-colors group">
+            <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+            <span class="font-bold">Voltar para Home</span>
+        </a>
+        <h1 class="text-white font-bold hidden sm:block">Tech Hub Academy</h1>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        
+        <div class="text-center mb-16">
+            <span class="text-primary font-bold uppercase tracking-widest text-sm">Graduação</span>
+            <h1 class="text-4xl md:text-6xl font-black text-white mt-4 mb-6">Engenharia de Software</h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">Muito mais que programar. O curso prepara você para arquitetar, gerenciar e criar soluções tecnológicas complexas que resolvem problemas reais.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-[#1a2336] p-8 rounded-2xl border border-white/5 hover:border-primary/50 transition-all">
+                <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center text-primary mb-4">
+                    <span class="material-symbols-outlined">code</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Desenvolvimento</h3>
+                <p class="text-gray-400">Domine linguagens como Python, Java e JavaScript, além de frameworks modernos para Web e Mobile.</p>
+            </div>
+            <div class="bg-[#1a2336] p-8 rounded-2xl border border-white/5 hover:border-primary/50 transition-all">
+                <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center text-primary mb-4">
+                    <span class="material-symbols-outlined">architecture</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Arquitetura</h3>
+                <p class="text-gray-400">Aprenda a desenhar sistemas escaláveis, microsserviços e padrões de projeto (Design Patterns).</p>
+            </div>
+            <div class="bg-[#1a2336] p-8 rounded-2xl border border-white/5 hover:border-primary/50 transition-all">
+                <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center text-primary mb-4">
+                    <span class="material-symbols-outlined">group</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Gestão Ágil</h3>
+                <p class="text-gray-400">Metodologias como Scrum e Kanban para liderar equipes e entregar projetos de alto valor.</p>
+            </div>
+        </div>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 border-l-4 border-primary pl-4">O que você vai estudar?</h2>
+            <div class="grid md:grid-cols-2 gap-4 text-gray-300">
+                <div class="flex items-center gap-3 bg-[#1a2336] p-4 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                    Algoritmos e Estrutura de Dados
+                </div>
+                <div class="flex items-center gap-3 bg-[#1a2336] p-4 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                    Banco de Dados (SQL e NoSQL)
+                </div>
+                <div class="flex items-center gap-3 bg-[#1a2336] p-4 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                    Engenharia de Requisitos
+                </div>
+                <div class="flex items-center gap-3 bg-[#1a2336] p-4 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                    Testes e Qualidade de Software
+                </div>
+                <div class="flex items-center gap-3 bg-[#1a2336] p-4 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                    DevOps e Cloud Computing
+                </div>
+                <div class="flex items-center gap-3 bg-[#1a2336] p-4 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                    Inteligência Artificial e Machine Learning
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center bg-gradient-to-r from-primary/20 to-blue-600/20 p-12 rounded-3xl border border-primary/30">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Pronto para construir o futuro?</h2>
+            <p class="text-gray-300 mb-8">A área de tecnologia tem milhares de vagas abertas esperando por profissionais qualificados.</p>
+            <a href="https://www.google.com/search?q=curso+engenharia+de+software" target="_blank" class="inline-flex items-center gap-2 bg-primary hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
+                Buscar Faculdades
+                <span class="material-symbols-outlined">search</span>
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-white/10 py-8 text-center text-gray-500 text-sm">
+        © 2025 Tech Hub. Todos os direitos reservados.
+    </footer>
+</body>
+</html>
