@@ -19,7 +19,8 @@ SECRET_KEY = config('SECRET_KEY', default='chave-insegura-para-dev-local')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Lista de IPs permitidos. No .env separamos por vírgula: "127.0.0.1,SEU_IP_HOSTINGER"
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
+# Ele vai ler a lista do arquivo .env
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -119,3 +120,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Configuração de Confiança para o Chatbot e Formulários
+# Lê a lista do .env, separada por vírgula
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv())
