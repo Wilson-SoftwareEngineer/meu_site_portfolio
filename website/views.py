@@ -13,7 +13,7 @@ except:
     client = None
 
 def index(request):
-    posts = Post.objects.all().order_by('-data_criacao')[:3]
+    posts = Post.objects.all().order_by('-data_criacao')[:4]
     membros = HallOfFameMember.objects.all()
     context = {'posts': posts, 'membros': membros}
     return render(request, 'website/index.html', context)
