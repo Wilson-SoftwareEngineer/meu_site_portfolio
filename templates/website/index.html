@@ -43,7 +43,7 @@
         </div>
         <div id="chat-messages" class="h-80 p-4 overflow-y-auto bg-[#101622] flex flex-col gap-3">
             <div class="self-start bg-[#1a2336] text-gray-200 p-3 rounded-lg rounded-tl-none border border-white/5 text-sm max-w-[80%]">
-                Olá! Sou a IA do Piauí Tech Hub. Represento o Eng. Wilson. Posso ajuda-lo?
+                Olá! Sou a IA do Piauí Tech Hub. Represento o Wilson. Posso ajuda-lo?
             </div>
         </div>
         <div class="p-3 bg-[#1a2336] border-t border-white/10 flex gap-2">
@@ -95,7 +95,7 @@
                                 <div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-4" 
                                      style='background-image: linear-gradient(rgba(16, 22, 34, 0.7) 0%, rgba(16, 22, 34, 0.9) 100%), url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop");'>
                                     <div class="flex flex-col gap-2 text-center max-w-2xl">
-                                        <h1 class="text-white text-4xl font-black leading-tight">Construindo o Futuro Digital.</h1>
+                                        <h1 class="text-white text-4xl font-black leading-tight">Em sintonia com a evolução tecnológica</h1>
                                         <h2 class="text-gray-300 text-sm font-normal">Seu hub de conhecimento em Engenharia de Software e Tecnologia.</h2>
                                     </div>
                                     <button onclick="document.getElementById('ultimas-publicacoes').scrollIntoView({behavior: 'smooth'})" 
@@ -192,7 +192,7 @@
                                     </div>
                                     <h3 class="text-xl font-bold text-white mt-2">{{ membro.nome }}</h3>
                                     <span class="text-primary text-xs font-bold uppercase tracking-wider mb-3 block">{{ membro.titulo }}</span>
-                                    <p class="text-gray-400 text-sm leading-relaxed text-center">{{ membro.descricao|truncatewords:20 }}</p>
+                                    <p class="text-gray-400 text-sm leading-relaxed text-justify h-48 overflow-y-auto pr-2 custom-scrollbar">{{ membro.descricao }}</p>
                                 </div>
                                 {% endfor %}
                             </div>
