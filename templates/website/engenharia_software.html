@@ -107,8 +107,33 @@
                 <span class="material-symbols-outlined">search</span>
             </a>
         </div>
+        <section class="mt-20 pt-10 border-t border-white/10" id="artigos-tecnicos">
+            <h2 class="text-3xl font-bold text-white mb-8 border-l-4 border-primary pl-4">Artigos Técnicos & Práticos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for post in posts %}
+                <div class="flex flex-col gap-3 pb-3 bg-[#1a2336] rounded-xl overflow-hidden group border border-transparent hover:border-primary/50 transition-all">
+                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover" style='background-image: url("{{ post.imagem.url }}");'></div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <p class="text-primary text-xs font-bold uppercase tracking-wider mb-2">{{ post.get_categoria_display }}</p>
+                        
+                        <p class="text-white text-xl font-medium leading-tight">{{ post.titulo }}</p>
+                        <p class="text-[#90a4cb] text-sm mt-2 flex-grow">{{ post.subtitulo|truncatechars:100 }}</p>
+                        
+                        <a class="text-primary text-sm font-bold mt-4 inline-flex items-center gap-2 group-hover:gap-3 transition-all" href="{% url 'post_detail' post.id %}">
+                           Ler Artigo <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-span-3 text-center py-10 bg-[#1a2336]/50 rounded-xl">
+                    <p class="text-gray-400">Nenhum artigo técnico publicado ainda.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
 
-    </main>
+     </main>
 
     <footer class="border-t border-white/10 py-8 text-center text-gray-500 text-sm">
         © 2025 Tech Hub. Todos os direitos reservados.

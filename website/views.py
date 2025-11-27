@@ -4,33 +4,78 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from decouple import config
 from openai import OpenAI
-from .models import Post, HallOfFameMember
+from .models import Post, HallOfFameMember, Perfil, Configuracao
 
-# Configuração do Cliente OpenAI (lendo do .env)
+# --- Configuração OpenAI ---
 try:
     client = OpenAI(api_key=config('OPENAI_API_KEY'))
 except:
     client = None
 
+# --- Helper para dados comuns (Header/Footer) ---
+def get_common_context():
+    config_site, _ = Configuracao.objects.get_or_create(pk=1)
+    return {'config': config_site}
+
+# --- Views do Site ---
 def index(request):
-    posts = Post.objects.all().order_by('-data_criacao')[:4]
+    context = get_common_context()
+    
+    # Busca dados dinâmicos
+    perfil, _ = Perfil.objects.get_or_create(pk=1)
+    posts = Post.objects.all().order_by('-data_criacao')[:6] # Mostra os 6 últimos
     membros = HallOfFameMember.objects.all()
-    context = {'posts': posts, 'membros': membros}
+    
+    context.update({
+        'posts': posts, 
+        'membros': membros,
+        'perfil': perfil
+    })
     return render(request, 'website/index.html', context)
 
+def listar_posts_por_categoria(request, categoria_slug):
+    """Filtra posts quando clica no Menu (Tutoriais, Guias, etc)"""
+    context = get_common_context()
+    
+    posts = Post.objects.filter(categoria=categoria_slug).order_by('-data_criacao')
+    nome_categoria = dict(Post.CATEGORIAS).get(categoria_slug, "Publicações")
+    
+    context.update({
+        'posts': posts,
+        'titulo_pagina': nome_categoria
+    })
+    return render(request, 'website/lista_posts.html', context)
+
 def post_detail(request, id):
+    context = get_common_context()
     post = get_object_or_404(Post, id=id)
-    return render(request, 'website/post_detail.html', {'post': post})
+    context['post'] = post
+    return render(request, 'website/post_detail.html', context)
+
+# ... (imports anteriores mantidos)
 
 def engenharia_software(request):
-    return render(request, 'website/engenharia_software.html')
+    context = get_common_context()
+    
+    # Define quais categorias pertencem ao grupo "Engenharia de Software"
+    categorias_eng = ['ENG', 'DEV', 'ARQ', 'AGIL']
+    
+    # Filtra posts onde a categoria esteja DENTRO dessa lista (__in)
+    posts = Post.objects.filter(categoria__in=categorias_eng).order_by('-data_criacao')
+    
+    context.update({
+        'posts': posts
+    })
+    
+    return render(request, 'website/engenharia_software.html', context)
+
+# ... (restante do arquivo continua igual)
 
 # --- CHATBOT INTELIGENTE ---
 @csrf_exempt
 def chat_api(request):
     if request.method == 'POST':
         try:
-            # Verifica se a chave da API existe
             if not client:
                 return JsonResponse({'reply': 'Erro: Chave de API não configurada no servidor.'})
 
@@ -54,8 +99,7 @@ def chat_api(request):
             return JsonResponse({'reply': ai_response})
         
         except Exception as e:
-            # Se der erro (ex: falta de créditos), mostramos no console da VPS
             print(f"ERRO OPENAI: {e}")
-            return JsonResponse({'reply': 'Estou com dificuldade de conexão com a IA no momento. Tente mais tarde.'}, status=500)
+            return JsonResponse({'reply': 'Estou com dificuldade de conexão com a IA no momento.'}, status=500)
 
     return JsonResponse({'error': 'Método inválido'}, status=400)
