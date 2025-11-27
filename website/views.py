@@ -83,16 +83,22 @@ def chat_api(request):
             user_message = data.get('message', '')
 
             response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                # O 'mini' é muito inteligente e extremamente barato
+                model="gpt-4o-mini", 
+                
                 messages=[
                     {
                         "role": "system", 
-                        "content": "Você é o assistente inteligente do Piauí Tech Hub. Responda de forma curta e técnica."
+                        "content": (
+                            "Você é o assistente técnico do Piauí Tech Hub. "
+                            "Suas respostas devem ser diretas, assertivas e tecnicamente profundas. "
+                            "Vá direto ao ponto e priorize a solução técnica."
+                        )
                     },
                     {"role": "user", "content": user_message}
                 ],
-                max_tokens=250,
-                temperature=0.7
+                max_tokens=700, # Pode manter alto, o mini é barato
+                temperature=0.3
             )
 
             ai_response = response.choices[0].message.content
